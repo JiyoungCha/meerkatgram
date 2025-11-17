@@ -1,0 +1,104 @@
+/**
+ * @file databases/migrations/20251117-01-create-users.js
+ * @description users migration file
+ * 251117 v1.0.0 CK init
+ */
+
+import { DataTypes } from 'sequelize';
+
+// 테이블명
+const tableNames = 'users';
+
+// 컬럼 정의
+const attributes = {
+  id: {
+    field: 'id',
+    type: DataTypes.BIGINT.UNSIGNED,
+    primaryKey: true,
+    allowNull: false,
+    autoIncrement: true,
+    comment: '유저 PK',
+  },
+  email: {
+    field: 'email',
+    type: DataTypes.STRING(100),
+    allowNull: false,
+    unique: true,
+    comment: '이메일(로그인ID)',
+  },
+  password: {
+    field: 'password',
+    type: DataTypes.STRING(255),
+    allowNull: false,
+    comment: '비밀번호',
+  },
+  nick: {
+    field: 'nick',
+    type: DataTypes.STRING(15),
+    allowNull: false,
+    unique: true,
+    comment: '닉네임',
+  },
+  provider: {
+    field: 'provider',
+    type: DataTypes.STRING(10),
+    allowNull: false,
+    comment: '로그인 제공자(NONE, KAKAO, GOOGLE...)'
+  },
+  role: {
+    field: 'role',
+    type: DataTypes.STRING(10),
+    allowNull: false,
+    comment: '유저 권한(NOMAL, SUPER...)',
+  },
+  profile: {
+    field: 'profile',
+    type: DataTypes.STRING(100),
+    allowNull: false,
+    comment: '유저 프로필'
+  },
+  refreshToken: {
+    field: 'refresh_token',
+    type: DataTypes.STRING(225),
+    allowNull: true,
+    comment: '리프래시 토큰',
+  },  
+  createdAt: {
+    field: 'created_at', 
+    type: DataTypes.DATE,
+    allowNull: true,
+    comment: '생성일',
+  },
+  updatedAt: {
+    field: 'updated_at', 
+    type: DataTypes.DATE,
+    allowNull: true,
+    comment: '수정일',
+  },
+  deletedAt: {
+    field: 'deleted_at',
+    type: DataTypes.DATE,
+    allowNull: true,
+    comment: '삭제일',
+  },
+};
+
+// 옵션 설정
+const options = {
+  charset: 'utf8mb4',       // 테이블 문자셋 설정(이모지 지원)
+  collate: 'utf8mb4_bin',   // 정렬 방식 설정(영어 대소문자 구분 정렬)
+  engine: 'InnoDB',         // 사용 엔진 설정  
+};
+
+/** @type {import('sequelize-cli').Migration} */
+export default {
+  // 마이그레이션을 실행 시 호출되는 메소드 (스키마 생성, 수정)
+  async up (queryInterface, Sequelize) {
+    await queryInterface.createTable(tableNames, attributes, options);
+  },
+
+  // 마이그레이션을 올백 시 호출되는 메소드 (스키마 제거, 수정)
+  async down (queryInterface, Sequelize) {
+    await queryInterface.dropTable(tableNames);
+  }
+};
