@@ -1,15 +1,14 @@
 :root {
-  --primary-100:#2C3A4F;
-  --primary-200:#56647b;
-  --primary-300:#b4c2dc;
-  --accent-100:#FF4D4D;
-  --accent-200:#ffecda;
-  --text-100:#FFFFFF;
-  --text-200:#e0e0e0;
-  --bg-100:#1A1F2B;
-  --bg-200:#292e3b;
-  --bg-300:#414654;
-      
+  --red-btn: #de283b;
+  --warning-text: #ff6366;
+  --blue-text: #45B1C0;
+  --darkgreen: #005461;
+  --text-black: #1a1a1a;
+  --text-gray: #404040;
+  --bg-white: #ffffff;
+  --input-box: #f5f5f5;
+  --input-text: #cccccc;
+
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
