@@ -8,7 +8,6 @@ import express from 'express';
 import authController from '../app/controllers/auth.controller.js';
 import validationHandler from '../app/middlewares/validations/validationHandler.js';
 import loginValidators from '../app/middlewares/validations/validators/auth/login.validators.js';
-// import { authController } from '../app/controllers/auth.controller.js';
 
 const authRouter = express.Router();
 

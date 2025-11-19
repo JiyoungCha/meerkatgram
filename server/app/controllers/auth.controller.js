@@ -5,7 +5,7 @@
  */
 
 import { SUCCESS } from "../../configs/responseCode.config.js";
-import { createBaseResponse } from "../../utils/createBaseResponse.util.js";
+import { createBaseResponse } from "../utils/createBaseResponse.util.js";
 
 // --------------------
 // -------public-------

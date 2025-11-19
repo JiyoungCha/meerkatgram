@@ -6,7 +6,7 @@
 
 import { validationResult } from "express-validator";
 import { BAD_REQUEST_ERROR } from "../../../configs/responseCode.config.js";
-import { createBaseResponse } from "../../../utils/createBaseResponse.util.js";
+import { createBaseResponse } from "../../utils/createBaseResponse.util.js";
 
 export default function validationHandler(req, res, next) {
   const errors = validationResult(req);
