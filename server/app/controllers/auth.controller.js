@@ -5,6 +5,7 @@
  */
 
 import { SUCCESS } from "../../configs/responseCode.config.js";
+import authService from "../services/auth.service.js";
 import { createBaseResponse } from "../utils/createBaseResponse.util.js";
 
 // --------------------
@@ -17,11 +18,18 @@ import { createBaseResponse } from "../utils/createBaseResponse.util.js";
  * @param {import("express").NextFunction} next - NextFunction 객체
  */
 async function login(req, res, next) {
-  const body = req.body;
-  // return res.status(200).send(body);
-  // response body 중앙관리화
-  return res.status(SUCCESS.status).send(createBaseResponse(SUCCESS, body));
-};
+  try {
+    const body = req.body; // 파라미터 획득
+
+    // 로그인 서비스 호출
+    const result = await authService.login(body);
+    // return res.status(200).send(body);
+    // response body 중앙관리화
+    return res.status(SUCCESS.status).send(createBaseResponse(SUCCESS, result));
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+}
 
 // --------------------
 // -------export-------
@@ -33,4 +41,4 @@ async function login(req, res, next) {
 
 export default {
   login,
-};
+}
