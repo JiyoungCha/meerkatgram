@@ -1,13 +1,13 @@
 /**
- * @file app/models/User.js
- * @description user model
+ * @file app/models/Like.js
+ * @description like model
  * 251120 v1.0.0 CK init
  */
 
 import { DataTypes, Sequelize } from "sequelize";
 import dayjs from 'dayjs';
 
-const modelName = 'User'; // 모델명(JS 내부에서 사용)
+const modelName = 'Like'; // 모델명(JS 내부에서 사용)
 
 const attributes = {
   id: {
@@ -16,52 +16,20 @@ const attributes = {
     primaryKey: true,
     allowNull: false,
     autoIncrement: true,
+    comment: '좋아요 PK',
+  },
+  userId: {
+    field: 'user_id',
+    type: DataTypes.BIGINT.UNSIGNED,
+    allowNull: false,
     comment: '유저 PK',
   },
-  email: {
-    field: 'email',
-    type: DataTypes.STRING(100),
+  postId: {
+    field: 'post_id',
+    type: DataTypes.BIGINT.UNSIGNED,
     allowNull: false,
-    unique: true,
-    comment: '이메일(로그인ID)',
-  },
-  password: {
-    field: 'password',
-    type: DataTypes.STRING(255),
-    allowNull: false,
-    comment: '비밀번호',
-  },
-  nick: {
-    field: 'nick',
-    type: DataTypes.STRING(15),
-    allowNull: false,
-    unique: true,
-    comment: '닉네임',
-  },
-  provider: {
-    field: 'provider',
-    type: DataTypes.STRING(10),
-    allowNull: false,
-    comment: '로그인 제공자(NONE, KAKAO, GOOGLE...)'
-  },
-  role: {
-    field: 'role',
-    type: DataTypes.STRING(10),
-    allowNull: false,
-    comment: '유저 권한(NOMAL, SUPER...)',
-  },
-  profile: {
-    field: 'profile',
-    type: DataTypes.STRING(100),
-    allowNull: false,
-    comment: '유저 프로필'
-  },
-  refreshToken: {
-    field: 'refresh_token',
-    type: DataTypes.STRING(225),
-    allowNull: true,
-    comment: '리프래시 토큰',
-  },  
+    comment: '게시글 PK',
+  }, 
   createdAt: {
     field: 'created_at', 
     type: DataTypes.DATE,
@@ -109,15 +77,14 @@ const options = {
   paranoid: true,     // soft delete 설정 (deletedAt 자동 관리) 
 }
 
-const User = {
+const Like = {
   init: (sequelize) => {
     const define = sequelize.define(modelName, attributes, options);
 
     // JSON으로 serialize시, 제외 할 컬럼을 지정
     define.prototype.toJSON = function() {
       const attributes = this.get();
-      delete attributes.password;
-      delete attributes.refreshToken;
+      delete attributes.userId;
 
       return define;
     }
@@ -125,12 +92,8 @@ const User = {
     return define;
   },
   associate: (db) => {
-    db.User.hasMany(db.Post, { sourceKey: 'id', foreignKey: 'userId', as: 'userIds' });
-    db.User.hasMany(db.Like, { sourceKey: 'id', foreignKey: 'userId', as: 'userIds' });
-    db.User.hasMany(db.Comment, { sourceKey: 'id', foreignKey: 'userId', as: 'userIds' });
-    db.User.hasMany(db.Notification, { sourceKey: 'id', foreignKey: 'userId', as: 'userIds' });
-    db.User.hasMany(db.PushSubscription, { sourceKey: 'id', foreignKey: 'userId', as: 'userIds' });
+    db.Like.belongsTo(db.Post, { targetKey: 'id', foreignKey: 'postId', as: 'postIds' });
   },
 }
 
-export default User;
+export default Like;
