@@ -8,4 +8,5 @@
 // export default [email, password];
 
 import userField from "../../fields/user.field.js";
+
 export default [userField.email, userField.password];

@@ -4,7 +4,7 @@
  * 251119 v1.0.0 CK init
  */
 
-// import { body } from "express-validator";
+import { body } from "express-validator";
 
 // export const email = body('email').trim()
 //   .notEmpty().withMessage('이메일은 필수 항목 입니다.')
