@@ -4,11 +4,10 @@
  * 251124 v1.0.0 CK init
  */
 
-import dayjs from "dayjs";
-import { DataTypes } from "sequelize";
+import dayjs from 'dayjs';
+import { DataTypes } from 'sequelize';
 
-// 테이블명
-const modelName = 'Comment';
+const modelName = 'Comment'; // 모델명(JS 내부에서 사용)
 
 // 컬럼 정의
 const attributes = {
@@ -31,24 +30,23 @@ const attributes = {
     type: DataTypes.BIGINT.UNSIGNED,
     allowNull: false,
     comment: '게시글 PK',
-  },  
+  },
   content: {
     field: 'content',
     type: DataTypes.STRING(1000),
     allowNull: false,
-    comment: '코멘트 내용',
+    comment: '내용'
   },
   replyId: {
     field: 'reply_id',
     type: DataTypes.BIGINT.UNSIGNED,
     allowNull: false,
     comment: '대댓글 PK',
-  },  
+  },
   createdAt: {
-    field: 'created_at', 
+    field: 'created_at',
     type: DataTypes.DATE,
     allowNull: true,
-    comment: '생성일',
     get() {
       const val = this.getDataValue('createdAt');
       if(!val) {
@@ -56,13 +54,11 @@ const attributes = {
       }
       return dayjs(val).format('YYYY-MM-DD HH:mm:ss');
     }
-    
   },
   updatedAt: {
-    field: 'updated_at', 
+    field: 'updated_at',
     type: DataTypes.DATE,
     allowNull: true,
-    comment: '수정일',
     get() {
       const val = this.getDataValue('updatedAt');
       if(!val) {
@@ -75,7 +71,6 @@ const attributes = {
     field: 'deleted_at',
     type: DataTypes.DATE,
     allowNull: true,
-    comment: '삭제일',
     get() {
       const val = this.getDataValue('deletedAt');
       if(!val) {
@@ -83,33 +78,25 @@ const attributes = {
       }
       return dayjs(val).format('YYYY-MM-DD HH:mm:ss');
     }
-  },
+  }
 };
 
 const options = {
   tableName: 'comments', // 실제 DB 테이블명
-  timestamps: true,   // createdAt, updateAt를 자동 관리
-  paranoid: true,     // soft delete 설정 (deletedAt 자동 관리) 
-}
+  timestamps: true,   // createdAt, updatedAt를 자동 관리
+  paranoid: true,     // soft delete 설정 (deletedAt 자동 관리)
+};
 
-const Post = {
+const Comment = {
   init: (sequelize) => {
     const define = sequelize.define(modelName, attributes, options);
-
-    // JSON으로 serialize시, 제외 할 컬럼을 지정
-    define.prototype.toJSON = function() {
-      const attributes = this.get();
-      delete attributes.userId;
-
-      return define;
-    }
 
     return define;
   },
   associate: (db) => {
-    db.Comment.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'userIds' });
-    db.Comment.belongsTo(db.User, { targetKey: 'id', foreignKey: 'postId', as: 'commnetpostIds' });
+    db.Comment.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'author' });
+    db.Comment.belongsTo(db.Post, { targetKey: 'id', foreignKey: 'postId', as: 'post' });
   },
-}
+};
 
 export default Comment;

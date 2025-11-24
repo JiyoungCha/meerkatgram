@@ -13,8 +13,8 @@ const tableName = 'users';
 const records = [
   {
     email: 'admin@admin.com',
-    password: bcrypt.hashSync('pwa12345', 10),
-    nick: '관리하는 물개',
+    password: bcrypt.hashSync('qwe12312', 10),
+    nick: '미어캣관리자',
     provider: 'NONE',
     role: 'SUPER',
     profile: '',
@@ -23,8 +23,8 @@ const records = [
   },
   {
     email: 'admin2@admin.com',
-    password: bcrypt.hashSync('pwa12345', 10),
-    nick: '관리보고 하프물범',
+    password: bcrypt.hashSync('qwe12312', 10),
+    nick: '미어캣관리자2',
     provider: 'KAKAO',
     role: 'NOMAL',
     profile: '',

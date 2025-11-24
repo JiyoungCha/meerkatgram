@@ -4,11 +4,12 @@
  * 251120 v1.0.0 CK init
  */
 
-import { DataTypes, Sequelize } from "sequelize";
 import dayjs from 'dayjs';
+import { DataTypes } from 'sequelize';
 
 const modelName = 'Like'; // 모델명(JS 내부에서 사용)
 
+// 컬럼 정의
 const attributes = {
   id: {
     field: 'id',
@@ -29,12 +30,11 @@ const attributes = {
     type: DataTypes.BIGINT.UNSIGNED,
     allowNull: false,
     comment: '게시글 PK',
-  }, 
+  },
   createdAt: {
-    field: 'created_at', 
+    field: 'created_at',
     type: DataTypes.DATE,
     allowNull: true,
-    comment: '생성일',
     get() {
       const val = this.getDataValue('createdAt');
       if(!val) {
@@ -44,10 +44,9 @@ const attributes = {
     }
   },
   updatedAt: {
-    field: 'updated_at', 
+    field: 'updated_at',
     type: DataTypes.DATE,
     allowNull: true,
-    comment: '수정일',
     get() {
       const val = this.getDataValue('updatedAt');
       if(!val) {
@@ -60,7 +59,6 @@ const attributes = {
     field: 'deleted_at',
     type: DataTypes.DATE,
     allowNull: true,
-    comment: '삭제일',
     get() {
       const val = this.getDataValue('deletedAt');
       if(!val) {
@@ -68,33 +66,25 @@ const attributes = {
       }
       return dayjs(val).format('YYYY-MM-DD HH:mm:ss');
     }
-  },
+  }
 };
 
 const options = {
-  tableName: 'users', // 실제 DB 테이블명
-  timestamps: true,   // createdAt, updateAt를 자동 관리
-  paranoid: true,     // soft delete 설정 (deletedAt 자동 관리) 
-}
+  tableName: 'likes', // 실제 DB 테이블명
+  timestamps: true,   // createdAt, updatedAt를 자동 관리
+  paranoid: true,     // soft delete 설정 (deletedAt 자동 관리)
+};
 
 const Like = {
   init: (sequelize) => {
     const define = sequelize.define(modelName, attributes, options);
 
-    // JSON으로 serialize시, 제외 할 컬럼을 지정
-    define.prototype.toJSON = function() {
-      const attributes = this.get();
-      delete attributes.userId;
-
-      return define;
-    }
-
     return define;
   },
   associate: (db) => {
-    db.Like.belongsTo(db.Post, { targetKey: 'id', foreignKey: 'postId', as: 'postIds' });
-    db.Like.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'userIds' });
+    db.Like.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'author' });
+    db.Like.belongsTo(db.Post, { targetKey: 'id', foreignKey: 'postId', as: 'post' });
   },
-}
+};
 
 export default Like;

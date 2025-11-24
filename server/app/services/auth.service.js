@@ -15,7 +15,7 @@ async function login(body) {
 
   // 유저 존재 여부 체크
   if(!result) {
-    throw new Error('유저 없음');    
+    throw new Error('유저 없음');
   }
 
   // 비밀번호 체크

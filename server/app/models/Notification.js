@@ -4,11 +4,12 @@
  * 251120 v1.0.0 CK init
  */
 
-import { DataTypes, Sequelize } from "sequelize";
 import dayjs from 'dayjs';
+import { DataTypes } from 'sequelize';
 
 const modelName = 'Notification'; // 모델명(JS 내부에서 사용)
 
+// 컬럼 정의
 const attributes = {
   id: {
     field: 'id',
@@ -26,28 +27,27 @@ const attributes = {
   },
   title: {
     field: 'title',
-    type: DataTypes.STRING(100),
+    type: DataTypes.STRING(200),
     allowNull: false,
-    comment: '알림 제목',
+    comment: '제목'
   },
   content: {
     field: 'content',
-    type: DataTypes.STRING(300),
+    type: DataTypes.STRING(1000),
     allowNull: false,
-    comment: '알림 내용',
+    comment: '내용'
   },
   isRead: {
     field: 'is_read',
     type: DataTypes.TINYINT(1),
     allowNull: false,
-    defaultvalue: 0,
-    comments: '읽음여부',
+    defaultValue: 0,
+    comment: '읽음여부'
   },
   createdAt: {
-    field: 'created_at', 
+    field: 'created_at',
     type: DataTypes.DATE,
     allowNull: true,
-    comment: '생성일',
     get() {
       const val = this.getDataValue('createdAt');
       if(!val) {
@@ -57,10 +57,9 @@ const attributes = {
     }
   },
   updatedAt: {
-    field: 'updated_at', 
+    field: 'updated_at',
     type: DataTypes.DATE,
     allowNull: true,
-    comment: '수정일',
     get() {
       const val = this.getDataValue('updatedAt');
       if(!val) {
@@ -73,7 +72,6 @@ const attributes = {
     field: 'deleted_at',
     type: DataTypes.DATE,
     allowNull: true,
-    comment: '삭제일',
     get() {
       const val = this.getDataValue('deletedAt');
       if(!val) {
@@ -81,33 +79,24 @@ const attributes = {
       }
       return dayjs(val).format('YYYY-MM-DD HH:mm:ss');
     }
-  },
+  }
 };
 
 const options = {
-  tableName: 'users', // 실제 DB 테이블명
-  timestamps: true,   // createdAt, updateAt를 자동 관리
-  paranoid: true,     // soft delete 설정 (deletedAt 자동 관리) 
-}
+  tableName: 'notifications', // 실제 DB 테이블명
+  timestamps: true,   // createdAt, updatedAt를 자동 관리
+  paranoid: true,     // soft delete 설정 (deletedAt 자동 관리)
+};
 
 const Notification = {
   init: (sequelize) => {
     const define = sequelize.define(modelName, attributes, options);
 
-    // JSON으로 serialize시, 제외 할 컬럼을 지정
-    define.prototype.toJSON = function() {
-      const attributes = this.get();
-      delete attributes.useId;
-      delete attributes.isRead;
-
-      return define;
-    }
-
     return define;
   },
   associate: (db) => {
-    db.Notification.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'notificationsUserIds' });
+    db.Notification.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'author' });
   },
-}
+};
 
 export default Notification;

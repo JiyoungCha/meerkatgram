@@ -4,6 +4,8 @@
  * 251119 v1.0.0 CK init
  */
 
-import { email, password } from "../../fields/user.field.js";
+// import { email, password } from "../../fields/user.field.js";
+// export default [email, password];
 
-export default [email, password];
+import userField from "../../fields/user.field.js";
+export default [userField.email, userField.password];

@@ -4,11 +4,12 @@
  * 251120 v1.0.0 CK init
  */
 
-import { DataTypes, Sequelize } from "sequelize";
 import dayjs from 'dayjs';
+import { DataTypes } from 'sequelize';
 
 const modelName = 'PushSubscription'; // 모델명(JS 내부에서 사용)
 
+// 컬럼 정의
 const attributes = {
   id: {
     field: 'id',
@@ -29,13 +30,12 @@ const attributes = {
     type: DataTypes.STRING(255),
     allowNull: false,
     unique: true,
-    comment: '엔드포인트',
+    comment: '앤드포인트',
   },
   createdAt: {
-    field: 'created_at', 
+    field: 'created_at',
     type: DataTypes.DATE,
     allowNull: true,
-    comment: '생성일',
     get() {
       const val = this.getDataValue('createdAt');
       if(!val) {
@@ -45,10 +45,9 @@ const attributes = {
     }
   },
   updatedAt: {
-    field: 'updated_at', 
+    field: 'updated_at',
     type: DataTypes.DATE,
     allowNull: true,
-    comment: '수정일',
     get() {
       const val = this.getDataValue('updatedAt');
       if(!val) {
@@ -61,7 +60,6 @@ const attributes = {
     field: 'deleted_at',
     type: DataTypes.DATE,
     allowNull: true,
-    comment: '삭제일',
     get() {
       const val = this.getDataValue('deletedAt');
       if(!val) {
@@ -69,33 +67,24 @@ const attributes = {
       }
       return dayjs(val).format('YYYY-MM-DD HH:mm:ss');
     }
-  },
+  }
 };
 
 const options = {
-  tableName: 'users', // 실제 DB 테이블명
-  timestamps: true,   // createdAt, updateAt를 자동 관리
-  paranoid: true,     // soft delete 설정 (deletedAt 자동 관리) 
-}
+  tableName: 'push_subscriptions', // 실제 DB 테이블명
+  timestamps: true,   // createdAt, updatedAt를 자동 관리
+  paranoid: true,     // soft delete 설정 (deletedAt 자동 관리)
+};
 
 const PushSubscription = {
   init: (sequelize) => {
     const define = sequelize.define(modelName, attributes, options);
 
-    // JSON으로 serialize시, 제외 할 컬럼을 지정
-    define.prototype.toJSON = function() {
-      const attributes = this.get();
-      delete attributes.userId;
-      delete attributes.endpoint;
-
-      return define;
-    }
-
     return define;
   },
   associate: (db) => {
-    db.PushSubscription.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'pushSubscriptionUserIds' });
+    db.PushSubscription.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'author' });
   },
-}
+};
 
 export default PushSubscription;
