@@ -104,6 +104,7 @@ const Post = {
   associate: (db) => {
     // likes, comments의 부모일 때
     db.Post.hasMany(db.Like, { sourceKey: 'id', foreignKey: 'postId', as: 'likePostIds' });
+    db.Post.hasMany(db.comment, { sourceKey: 'id', foreignKey: 'postId', as: 'commentPostIds' });
 
     // users의 자식일 때
     db.Post.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'userIds' });

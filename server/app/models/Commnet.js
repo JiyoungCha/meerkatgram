@@ -1,14 +1,16 @@
 /**
- * @file app/models/Like.js
- * @description like model
- * 251120 v1.0.0 CK init
+ * @file app/models/Comment.js
+ * @description comment model
+ * 251124 v1.0.0 CK init
  */
 
-import { DataTypes, Sequelize } from "sequelize";
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
+import { DataTypes } from "sequelize";
 
-const modelName = 'Like'; // 모델명(JS 내부에서 사용)
+// 테이블명
+const modelName = 'Comment';
 
+// 컬럼 정의
 const attributes = {
   id: {
     field: 'id',
@@ -16,7 +18,7 @@ const attributes = {
     primaryKey: true,
     allowNull: false,
     autoIncrement: true,
-    comment: '좋아요 PK',
+    comment: '코멘트 PK',
   },
   userId: {
     field: 'user_id',
@@ -29,7 +31,19 @@ const attributes = {
     type: DataTypes.BIGINT.UNSIGNED,
     allowNull: false,
     comment: '게시글 PK',
-  }, 
+  },  
+  content: {
+    field: 'content',
+    type: DataTypes.STRING(1000),
+    allowNull: false,
+    comment: '코멘트 내용',
+  },
+  replyId: {
+    field: 'reply_id',
+    type: DataTypes.BIGINT.UNSIGNED,
+    allowNull: false,
+    comment: '대댓글 PK',
+  },  
   createdAt: {
     field: 'created_at', 
     type: DataTypes.DATE,
@@ -42,6 +56,7 @@ const attributes = {
       }
       return dayjs(val).format('YYYY-MM-DD HH:mm:ss');
     }
+    
   },
   updatedAt: {
     field: 'updated_at', 
@@ -72,12 +87,12 @@ const attributes = {
 };
 
 const options = {
-  tableName: 'users', // 실제 DB 테이블명
+  tableName: 'comments', // 실제 DB 테이블명
   timestamps: true,   // createdAt, updateAt를 자동 관리
   paranoid: true,     // soft delete 설정 (deletedAt 자동 관리) 
 }
 
-const Like = {
+const Post = {
   init: (sequelize) => {
     const define = sequelize.define(modelName, attributes, options);
 
@@ -92,9 +107,9 @@ const Like = {
     return define;
   },
   associate: (db) => {
-    db.Like.belongsTo(db.Post, { targetKey: 'id', foreignKey: 'postId', as: 'postIds' });
-    db.Like.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'userIds' });
+    db.Comment.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'userIds' });
+    db.Comment.belongsTo(db.User, { targetKey: 'id', foreignKey: 'postId', as: 'commnetpostIds' });
   },
 }
 
-export default Like;
+export default Comment;

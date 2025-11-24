@@ -94,7 +94,7 @@ const PushSubscription = {
     return define;
   },
   associate: (db) => {
-
+    db.PushSubscription.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'pushSubscriptionUserIds' });
   },
 }
 
