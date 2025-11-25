@@ -7,6 +7,7 @@
 import { BaseError } from "sequelize";
 import { DB_ERROR, SYSTEM_ERROR } from "../../configs/responseCode.config.js";
 import { createBaseResponse } from "../utils/createBaseResponse.util.js";
+import { logger } from "../middlewares/loggers/winston.logger.js";
 
 /**
  * 에러 핸들러

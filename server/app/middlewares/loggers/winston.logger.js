@@ -11,8 +11,8 @@ import dayjs from 'dayjs';
 // private
 // --------------
 // 커스텀 포맷 작성
-const customFormat = winston.format.printf((message, level) => {
-  // 출력) [YYYY-MM-DD HH:mm:ss] level - message
+const customFormat = winston.format.printf(({message, level}) => {
+  // 출력예) [2025-11-24 10:12:50] level - message
   const now = dayjs().locale(process.env.APP_TZ).format('YYYY-MM-DD HH:mm:ss');
   return `[${now}] ${level} - ${message}`;
 });
@@ -25,8 +25,8 @@ export const logger = winston.createLogger({
   level: process.env.LOG_LEVEL, // 로그 레벨 제한
   format: winston.format.combine(customFormat),
   transports: [ // 로그를 출력하는 관리 설정(파일? 콘솔? 어떻게?)
-    new winston.transports.File({ 
-      filename: `${process.env.LOG_BASE_PATH}/${dayjs().locale(process.env.APP_TZ).format('YYYY-MM-DD')}_${process.env.LOG_FILE_NAME}`  // 파일명 세팅
+    new winston.transports.File({
+      filename: `${process.env.LOG_BASE_PATH}/${dayjs().locale(process.env.APP_TZ).format('YYYYMMDD')}_${process.env.LOG_FILE_NAME}`, // 파일명
       // level: 'error' // 파일 작성 로그 레벨 제한
     }),
     // new winston.transports.Console({ '저장파일' }),
