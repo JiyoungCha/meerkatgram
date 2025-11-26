@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <>
       <div className="header-container">
-        <div className={`bottom-line ${(onlyTitleFlg && 'header-top') || 'header-top-grid'}`}>
+        <div className={`${(onlyTitleFlg && 'header-top') || 'header-top-grid bottom-line'}`}>
           <h1 className={`${(onlyTitleFlg && 'header-top-title-only') || ''}`}>Meerkagram</h1>
           {
             !onlyTitleFlg && (
