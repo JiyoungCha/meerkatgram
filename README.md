@@ -44,10 +44,10 @@ meerkatgram/
 npm create vite@latest .
 npm i dayjs react-router-dom @reduxjs/toolkit react-redux axios jwt-decode
 npm install -D vite-plugin-pwa
-
+````
 ### server
 ````
 npm init
-npm i express express-validator morgan winston dotenv sequelize sequelize-cli mysql2 cookie-parser jsonwebtoken cors multer swagger-ui-express yaml dayjs bcrypt web-push
+npm i express express-validator morgan winston dotenv sequelize sequelize-cli mysql2 cookie-parser jsonwebtoken cors multer swagger-ui-express yaml dayjs bcrypt web-push swagger-ui-express swagger-parser
 npm install -D nodemon
 ````

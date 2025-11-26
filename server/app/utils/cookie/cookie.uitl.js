@@ -22,7 +22,7 @@ function setCookie(res, cookieName, cookieValue, ttl, httpOnlFlg = true, secureF
     cookieName,
     cookieValue,
     {
-      expires: dayjs().add(ttl, 'millisecond').toDate(),
+      expires: dayjs().add(ttl, 'second').toDate(),
       httpOnly: httpOnlFlg,
       secure: secureFlg,
       sameSite: 'none',
