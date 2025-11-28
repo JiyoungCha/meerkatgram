@@ -26,7 +26,7 @@ requestBody:
           nick:
             description: 닉네임
             type: string
-            example: Kanna_Kamui
+            example: hui_bao
           profile:
             description: 프로필 사진
             type: string
@@ -62,7 +62,7 @@ responses:
                 nick:
                   description: 닉네임
                   type: string
-                  example: Kanna_kamui
+                  example: hui_bao
                 role:
                   description: 권한
                   type: string
