@@ -1,9 +1,10 @@
 /* 댓글 작성 박스 */
 .post-comment-create-box {
-  padding: 2px 5px;
+  background-color: var(--input-box);
+  padding: 3px 5px;
   display: grid;
   grid-template-columns: 1fr 35px;
-  border: 2px solid #000;
+  border: none;
   border-radius: 10px;
   gap: 5px;
 }

@@ -4,8 +4,8 @@ export default [
       postId: 11,
       user: {
         id: 1,
-        profile: '/dev/kanna.jpg',
-        nick: 'Kanna_kamui',
+        profile: '/dev/hui.jpg',
+        nick: 'hui_bao',
       },
       content: '초코초코 맛있어.초코초코 맛있어.초코초코 맛있어.초코초코 맛있어.초코초코 맛있어.초코초코 맛있어.',
       replyFlg: false,
@@ -17,8 +17,8 @@ export default [
       postId: 11,
       user: {
         id: 2,
-        profile: '/dev/kanna.jpg',
-        nick: 'Kanna_kamui2',
+        profile: '/dev/hui.jpg',
+        nick: 'hui_bao2',
       },
       content: '초코초코 맛있어.2',
       replyFlg: true,
@@ -30,8 +30,8 @@ export default [
       postId: 11,
       user: {
         id: 3,
-        profile: '/dev/kanna.jpg',
-        nick: 'Kanna_kamui3',
+        profile: '/dev/hui.jpg',
+        nick: 'hui_bao3',
       },
       content: '초코초코 맛있어.3',
       replyFlg: true,

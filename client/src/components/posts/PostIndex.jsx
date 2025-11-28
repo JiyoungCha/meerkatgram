@@ -20,7 +20,7 @@ export default function PostIndex() {
           <div className="post-index-card" style={{backgroundImage: `url("/dev/zzazan.jpg")`}}></div>
           <div className="post-index-card" style={{backgroundImage: `url("/dev/cat.jpg")`}}></div>
         </div>
-        <button type="button" className='btn-full-width bg-gray'>Show more posts from Kanna_Kamui</button>
+        <button type="button" className='btn-full-width bg-gray'>Show more posts from hui_bao</button>
       </div>
     </>
   )
