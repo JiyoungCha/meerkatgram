@@ -17,7 +17,7 @@ export default function PostIndex() {
         <div className="post-index-card-box">
           {
             list && list.map(item => {
-              return <div className="post-index-card" style={{backgroundImage: `url{"${item.image}"}`}} key={item.id}></div>
+              return <div className="post-index-card" style={{backgroundImage: `url(${item.image})`}} key={item.id}></div>
             })
           }
         </div>
