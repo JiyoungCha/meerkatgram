@@ -9,6 +9,7 @@ import fs from 'fs';
 import dayjs from 'dayjs'
 import myError from '../../../errors/customs/my.error.js'
 import { BAD_FILE_ERROR } from '../../../../configs/responseCode.config.js';
+import pathUtil from '../../../utils/path/path.util.js';
 
 /**
  * 게시글 이미지 업로드 처리 미들웨어
@@ -23,11 +24,12 @@ export default function(req,res, next) {
     storage: multer.diskStorage({
       // 파일 저장 경로 설정
       destination(req, file, callback) {
+        const fullPath = pathUtil.getPostsImagePath();
         // 저장 디렉토리 설정
-        if(!fs.existsSync(process.env.FILE_POST_IMAGE_PATH)) {
+        if(!fs.existsSync(fullPath)) {
           // 해당 디렉토리 없으면 생성 처리
           fs.mkdirSync(
-            process.env.FILE_POST_IMAGE_PATH,
+            fullPath,
             {
               recursive: true, // 중간 디렉토리까지 모두 생성
               mode: 0o755      // 권한 설정 rwxr-xr-x
@@ -44,7 +46,7 @@ export default function(req,res, next) {
         const fileNameParts = file.originalname.split('.');
         const extention = fileNameParts[fileNameParts.length - 1].toLowerCase();
 
-        callback(null, `${uniqueFileName}.${extention}`);
+        callback(null, fullPath);
       }
     }),
     // fileFilter: 파일 필터링 처리를 제어하는 프로퍼티
