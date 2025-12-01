@@ -20,7 +20,7 @@ export default function Header() {
                   (authFlg && <button type="button" className='btn-small bg-dark'>Logout</button>)
                   ||
                   <>
-                    <button type="button" className='btn-small bg-gray'>Sign In</button>
+                    <button type="button" className='btn-small bg-red'>Sign In</button>
                     <button type="button" className='btn-small bg-light'>Sign Up</button>
                   </>
                 }

@@ -4,9 +4,11 @@
  * 251128 v1.0.0 CK init
  */
 
-import { body, param } from "express-validator";
+import { body, param, query } from "express-validator";
+import path from "path";
 
-export const page = body('page')
+// 페이지 필드
+export const page = query('page')
   .trim()
   .optional()
   .isNumeric()

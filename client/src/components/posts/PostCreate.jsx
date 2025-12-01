@@ -7,7 +7,7 @@ export default function PostCreate() {
         <textarea className='post-create-textarea' name="content" placeholder='내용 작성'></textarea>
         <input type="file" name="profile" id="profile" accept="image/*" />
         <div className="post-create-image" style={{backgroundImage: `url("/dev/zzazan.jpg")`}}></div>
-        <button type="button" className="btn-big bg-gray">Write</button>
+        <button type="button" className="btn-big bg-red">Write</button>
       </div>
     </>
   )

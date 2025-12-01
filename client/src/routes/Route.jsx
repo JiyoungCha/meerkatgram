@@ -4,7 +4,7 @@ import PostIndex from "../components/posts/PostIndex.jsx";
 import Login from "../components/auth/Login.jsx";
 import Registration from "../components/users/Registration.jsx";
 import UserInfo from "../components/users/UserInfo.jsx";
-import PostsShow from "../components/posts/PostShow.jsx";
+import PostShow from "../components/posts/PostShow.jsx";
 import PostCreate from "../components/posts/PostCreate.jsx";
 
 const router = createBrowserRouter([
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
         element: <Registration />
       },
       {
-        path: '/users',
+        path: '/users/:id',
         element: <UserInfo />
       },
       {
@@ -36,8 +36,9 @@ const router = createBrowserRouter([
         element: <PostIndex />
       },
       {
+        // post/create 와 개층이 겹치지 않게 조절
         path: '/posts/show/:id',
-        element: <PostsShow />
+        element: <PostShow />
       },
       {
         path: '/posts/create',

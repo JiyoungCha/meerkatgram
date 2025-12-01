@@ -10,7 +10,7 @@ export default function Registration() {
         <input type="text" className='input-big-border' name="name" id="name"  placeholder='name' />
         <input type="file" name="profile" id="profile" accept="image/*" />
         <div className="profile profile-medium" style={{backgroundImage: `url("/dev/hui.jpg")`}}></div>
-        <button type="button" className="btn-big bg-gray">Sign up</button>
+        <button type="button" className="btn-big bg-red">Sign up</button>
       </div>
     </>
   )

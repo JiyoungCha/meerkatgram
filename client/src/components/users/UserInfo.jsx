@@ -9,7 +9,7 @@ export default function UserInfo() {
         <input type="text" className='input-big-border' name="name" id="name" value='hui_bao' />
         <input type="file" name="profile" id="profile" accept="image/*" />
         <div className="profile profile-medium" style={{backgroundImage: `url("/dev/hui.jpg")`}}></div>
-        <button type="button" className="btn-big bg-gray">Change</button>
+        <button type="button" className="btn-big bg-red">Change</button>
       </div>
     </>
   )

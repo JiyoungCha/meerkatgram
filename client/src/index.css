@@ -62,12 +62,17 @@ button {
 }
 
 /* 배경 관련 */
+.bg-gray {
+  background-color: var(--text-gray);
+  color: var(--input-box);
+}
+
 .bg-dark {
   background-color: var(--darkgreen);
   color: var(--input-box);
 }
 
-.bg-gray {
+.bg-red {
   background-color: var(--red-btn);
   color: var(--input-box);
 }
