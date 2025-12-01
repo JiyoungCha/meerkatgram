@@ -34,7 +34,7 @@ requestBody:
           nick:
             description: 닉네임
             type: string
-            example: hui_bao
+            example: Kanna_Kamui
           profile:
             description: 프로필 사진
             type: string

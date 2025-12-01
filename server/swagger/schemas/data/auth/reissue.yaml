@@ -53,7 +53,7 @@ responses:
                     nick:
                       description: 닉네임
                       type: string
-                      example: hui_bao
+                      example: Kanna_kamui
                     role:
                       description: 권한
                       type: string
