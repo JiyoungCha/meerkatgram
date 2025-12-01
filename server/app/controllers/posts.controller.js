@@ -54,7 +54,7 @@ async function show(req, res, next) {
 async function store(req, res, next) {
   try {
     const data = {
-      userId: req.user.id,
+      userId: req.user.id, // auth middleware에서 셋팅한 것
       content: req.body.content,
       image: req.body.image,
     };
@@ -77,7 +77,7 @@ async function store(req, res, next) {
 async function destroy(req, res, next) {
   try {
     const data = {
-      userId: req.user.id,
+      userId: req.user.id, // auth middleware에서 셋팅한 것
       postId: req.params.id
     };
 

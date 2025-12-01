@@ -44,6 +44,9 @@ async function show(id) {
  */
 async function create(data) {
   return await postRepository.create(null, data);
+  // return db.sequelize.transaction(async t => {
+  //   return await postRepository.create(t, data);
+  // });
 }
 
 /**
@@ -53,7 +56,7 @@ async function create(data) {
  */
 async function destroy({ userId, postId }) {
   // 트랜잭션 시작
-  return db.sequelize.transaction(async t => {
+  return await db.sequelize.transaction(async t => {
     // (게시글 작성자 일치 확인용)
     const post = await postRepository.findByPk(t, postId);
 
@@ -69,6 +72,7 @@ async function destroy({ userId, postId }) {
     await likeRepository.destroy(t, postId);
     
     // 게시글 삭제
+    // 부모 테이블을 가장 마지막에 삭제해야함 PK 에러 방지
     await postRepository.destroy(t, postId);
   });
 }
