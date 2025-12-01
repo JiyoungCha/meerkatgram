@@ -1,7 +1,7 @@
 /**
  * @file app/repositories/comment.repository.js
  * @description comment Repository
- * 251129 v1.0.0 park init
+ * 251129 v1.0.0 CK init
  */
 
 import db from '../models/index.js';
