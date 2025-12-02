@@ -119,7 +119,7 @@ const User = {
       delete attributes.password;
       delete attributes.refreshToken;
 
-      return define;
+      return attributes;
     }
 
     return define;
