@@ -4,7 +4,7 @@ import './PostShow.css';
 import PostDelete from './PostDelete.jsx';
 
 export default function PostShow() {
-  const content = '초콜렛이.. 없어...?\n손나 바카나!!';
+  const content = '남산타워~\n엄마랑 루야웅니랑 돈까스 먹을고임';
   const [openDeleteFlg, setOpenDeleteFlg] = useState(false);
 
   function openDeleteModal() {

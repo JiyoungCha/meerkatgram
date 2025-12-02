@@ -1,8 +1,8 @@
 import './PostComment.css';
-
 import comments from '../../../../dev/data/postShow.js';
 import PostCommentCreate from './PostCommentCreate.jsx';
 import PostCommentItem from './PostCommentItem.jsx';
+
 export default function PostComment() {
   return (
     <>
