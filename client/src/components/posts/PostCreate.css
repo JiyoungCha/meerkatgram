@@ -1,5 +1,5 @@
 .post-create-container {
-  padding: 50px 20px 0;
+  padding: 50px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,6 +7,9 @@
 }
 
 .post-create-textarea {
+  background-color: var(--input-box);
+  color: var(--text-gray);
+  border: none;
   padding: 10px;
   border-radius: 10px;
   resize: none;

@@ -11,8 +11,8 @@ export default function PostDelete({setCloseDeleteModal}) {
             <p>정말 삭제하시겠습니까?</p>
           </div>
           <div className="post-delete-btn-box">
-            <button type="button" className='btn-medium bg-dark'>Delete</button>
-            <button type="button" className='btn-medium bg-red' onClick={setCloseDeleteModal}>Cancel</button>
+            <button type="button" className='btn-medium bg-red'>Delete</button>
+            <button type="button" className='btn-medium bg-gray' onClick={setCloseDeleteModal}>Cancel</button>
           </div>
         </div>
       </div>

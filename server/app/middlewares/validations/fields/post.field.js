@@ -6,6 +6,7 @@
 
 import { body, param, query } from "express-validator";
 import path from "path";
+import fs from 'fs';
 
 // 페이지 필드
 export const page = query('page')
