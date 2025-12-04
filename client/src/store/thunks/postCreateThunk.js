@@ -3,21 +3,21 @@ import axiosInstance from "../../api/axiosInstance.js";
 
 export const postImageUploadThunk = createAsyncThunk(
   'postCreate/postImageUploadThunk', // Thunk 고유명
-  async (file, { rejectWithValue }) => { 
+  async (file, { rejectWithValue }) => {
     try {
       const url = `/api/files/posts`;
       const headers = {
         'Content-Type': 'multipart/form-data'
-      }
+      };
 
       // 폼데이터 생성
       const formData = new FormData();
-      formData.append('image', file)
+      formData.append('image', file);
 
       const response = await axiosInstance.post(url, formData, { headers });
 
       return response.data;
-    } catch (error) {
+    } catch(error) {
       return rejectWithValue(error);
     }
   }
@@ -25,14 +25,14 @@ export const postImageUploadThunk = createAsyncThunk(
 
 export const postStoreThunk = createAsyncThunk(
   'postCreate/postStoreThunk', // Thunk 고유명
-  async (data, { rejectWithValue }) => { 
+  async (data, { rejectWithValue }) => {
     try {
       const url = `/api/posts`;
-
+      
       const response = await axiosInstance.post(url, data);
 
       return response.data;
-    } catch (error) {
+    } catch(error) {
       return rejectWithValue(error);
     }
   }

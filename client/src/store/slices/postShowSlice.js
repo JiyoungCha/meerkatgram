@@ -1,23 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 import { postShowThunk } from '../thunks/postShowThunk.js';
 
 const initialState = {
-  data: null,  
+  show: null,
 }
 
 const slice = createSlice({
   name: 'postShow',
-  initialState, 
+  initialState,
   reducers: {
     clearPostShow(state) {
-      state.data = null;
-    }
+      state.show = null;
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(postShowThunk.fulfilled, (state, action) => {
-        state.data = action.payload.data;
-
+        state.show = action.payload.data;
       })
   },
 });

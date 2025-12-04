@@ -10,7 +10,7 @@ import { clearPostShow } from '../../store/slices/postShowSlice.js';
 export default function PostShow() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { data } = useSelector(state => state.postShow);
+  const { show } = useSelector(state => state.postShow);
   const [openDeleteFlg, setOpenDeleteFlg] = useState(false);
 
   useEffect(() => {
@@ -31,21 +31,21 @@ export default function PostShow() {
   return (
     <>
       {
-        data && (
-        <div className="post-show-container">
-          <div className="post-show-post-box bottom-line">
-            <img className="post-show-post-img" src={`${data.image}`}></img>
-            <div className="post-show-post-info-items">
-              <div className="icon-delete" onClick={openDeleteModal} ></div>
-              <div className="post-show-post-likes-items">
-                <p>1919</p>
-                <div className='icon-heart-fill'></div>
+        show && (
+          <div className="post-show-container">
+            <div className="post-show-post-box bottom-line">
+              <img className="post-show-post-img" src={`${show.image}`}></img>
+              <div className="post-show-post-info-items">
+                <div className="icon-delete" onClick={openDeleteModal} ></div>
+                <div className="post-show-post-likes-items">
+                  <p>1919</p>
+                  <div className='icon-heart-fill'></div>
+                </div>
               </div>
+              <textarea className="post-show-post-constent" defaultValue={show.content}></textarea>
             </div>
-            <textarea className="post-show-post-constent" defaultValue={data.content}></textarea>
+            <PostComment id={id} comments={show.comments} /> 
           </div>
-          <PostComment id={id} comments={data.comments} /> 
-        </div>
         )
       }
       {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './PostCreate.css';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { postImageUploadThunk, postStoreThunk } from '../../store/thunks/postCreateThunk.js';
 
 export default function PostCreate() {
@@ -17,22 +17,22 @@ export default function PostCreate() {
     try {
       // 파일 업로드 처리
       const resultUpload = await dispatch(postImageUploadThunk(file)).unwrap();
-      const image =resultUpload.data.path;
+      const image = resultUpload.data.path; // 파일 업로드 URL 획득
 
       // 게시글 작성
-      const resultStore = await dispatch(postStoreThunk({ content, image })).unwrap();
+      const resultStore = await dispatch(postStoreThunk({ content, image})).unwrap();
       
       // 작성한 게시글 상세로 이동
       return navigate(`/posts/show/${resultStore.data.id}`, {replace: true});
-    } catch (error) {
+    } catch(error) {
       console.log('게시글 생성', error);
       return alert('게시글 생성 실패');
     }
   }
-
+  
   // 파일 변경시 처리 함수
   function changeFiles(e) {
-    // 선택 파일 정보 획득(1개의 파일만 올리는 걸 전제)
+    // 선택 파일 정보 획득(1개의 파일만 올리는걸 전제)
     const file = e.target.files[0];
 
     // 미리보기
@@ -51,7 +51,7 @@ export default function PostCreate() {
         {
           preview && (<div className="post-create-image" style={{backgroundImage: `url("${preview}")`}}></div>)
         }
-        <button type="submit" className="btn-big bg-red">Write</button>
+        <button type="submit" className="btn-big bg-gray">Write</button>
       </form>
     </>
   )
