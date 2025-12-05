@@ -26,8 +26,19 @@ function getProfilesImagePath() {
       path.resolve(process.env.FILE_USER_PROFILE_PATH);
 }
 
+// -----------------------------
+// 프로필 이미지 저장 관련
+// -----------------------------
+/**
+ * 프로필 이미지가 저장될 절대경로 반환
+ */
+function getUserProfileImagePath() {
+  return path.resolve(process.env.ACCESS_FILE_USER_PROFILE_PATH);
+}
+
 export default {
   getViewDirPath,
   getPostsImagePath,
   getProfilesImagePath,
+  getUserProfileImagePath,
 }
