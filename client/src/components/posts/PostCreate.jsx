@@ -51,7 +51,7 @@ export default function PostCreate() {
         {
           preview && (<div className="post-create-image" style={{backgroundImage: `url("${preview}")`}}></div>)
         }
-        <button type="submit" className="btn-big bg-gray">Write</button>
+        <button type="submit" className="btn-big bg-red">Write</button>
       </form>
     </>
   )
