@@ -41,6 +41,10 @@ export default function Login() {
     window.location.replace(`/api/auth/social/${provider}`);
   }
 
+  function redirectRegistration() {
+    navigate(`/registration`);
+  }
+
   return (
     <>
       <form className="login-container" onSubmit={handleLogin}>
@@ -49,7 +53,7 @@ export default function Login() {
         <button type="submit" className="btn-big bg-red">LOG IN</button>
         <div className="text-on-line">or</div>
         <button type="button" className="btn-big bg-img-kakao" onClick={() => {handleSocail('kakao')}}></button>
-        <button type="button" className="btn-big bg-light">Sign up</button>
+        <button type="button" className="btn-big bg-light" onClick={redirectRegistration}>Sign up</button>
       </form>
     </>
   )
