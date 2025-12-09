@@ -7,7 +7,7 @@
 import webpush from 'web-push';
 
 webpush.setVapidDetails(
-  process.env.JWT_ISSUER,
+  `mailto:${process.env.JWT_ISSUER}`,
   process.env.VAPID_PUBLIC_IC_KEY,
   process.env.VAPID_PRIVATE_KEY,
 );
