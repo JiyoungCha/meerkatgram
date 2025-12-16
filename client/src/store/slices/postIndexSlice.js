@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 import { postIndexThunk } from '../thunks/postIndexThunk.js';
 
 const initialState = {
@@ -9,18 +9,18 @@ const initialState = {
 
 const slice = createSlice({
   name: 'postIndex',
-  initialState, 
+  initialState,
   reducers: {
     clearPostIndex(state) {
       state.list = null;
       state.page = 0;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(postIndexThunk.fulfilled, (state, action) => {
         const { posts, page, count, limit } = action.payload.data;
-        
+
         // 리스트가 비어있는지 체크
         if(state.list) {
           state.list = [...state.list, ...posts];
@@ -32,7 +32,7 @@ const slice = createSlice({
         state.page = page;
 
         // 마지막 페이지 여부 플래그 저장
-        state.isLasted = (page * limit) >= count
+        state.isLasted = (page * limit) >= count;
       })
   },
 });
